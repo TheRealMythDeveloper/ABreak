@@ -77,10 +77,9 @@ function updatePlayer() {
 
  player.velocityY += player.gravity;
  player.y += player.velocityY;
-
+player.grounded = false;
  if (player.velocityY >= 0) {
     for (const platform of platformCollision){
-        player.grounded = false;
         const playerBottom = player.y + player.height;
         const overlapsX = 
         player.x + player.width > platform.x &&
@@ -215,7 +214,7 @@ platforms.forEach(platform => {
 
     ctx.fillStyle = "#a17b4d";
     //left side
-    ctx.fillRect(12, platform.y, leftEnd - 16, 8);
+    ctx.fillRect(16, platform.y, leftEnd - 16, 8);
     
     //right side
     ctx.fillRect(rightStart, platform.y, 144 - rightStart, 8);
@@ -236,11 +235,12 @@ for (let i = 0; i < 1000; i++) {
 
     if (x<12 || x>140) {
         barkDetails.push({
-        ctx.fillStyle = Math.random() > 0.5
-        ? "#a17b4d"
-        : "#493522"
-        ;
-        ctx.fillRect(x ,y , 2, Math.random() * 8 + 2);
+            x: x, 
+            y:y,
+            color: Math.random() > 0.5 ? "#a17b4d"
+        : "#493522" ,
+height: Math.random() * 8+2        
+        
         });
     }
 }
