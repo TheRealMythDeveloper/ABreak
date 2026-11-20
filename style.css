@@ -1,0 +1,15 @@
+
+.BeforeScroll
+{
+  height: 100px; 
+  width: 100%; 
+  display: none;
+}
+
+
+.AfterScroll
+{
+  height: 100px; 
+  width: 100%; 
+  display: block;
+}
