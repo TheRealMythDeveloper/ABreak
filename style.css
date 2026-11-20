@@ -62,7 +62,7 @@ body {
 }
    #treeCanvas{
     width: 100%;
-    height: fit-content;
+    height: 7200px;
     image-rendering: pixelated;
     display: block;
    }
