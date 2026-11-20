@@ -49,7 +49,7 @@ const player = {
     jumpPower: -4,
     gravity: 0.08,
 grounded:false
-};
+};  
 
 
 let cameraY = 0;
@@ -73,7 +73,7 @@ function updatePlayer() {
         player.grounded = false;
 
     }
- //gravittty
+ //gravittty 
 
  player.velocityY += player.gravity;
  player.y += player.velocityY;
@@ -194,7 +194,7 @@ ctx.fillRect(148,0,12,world_height);
 //more bark
 ctx.fillStyle = "#936b43";
 ctx.fillRect(0,0,4,world_height); 
-ctx.fillRect(161,0,3,world_height);
+ctx.fillRect(152,0,3,world_height);
  
 //hollow for the inside
 ctx.fillStyle = "#3e3025";
@@ -250,18 +250,8 @@ height: Math.random() * 8+2
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.save();
-
-    //camera so it doesnt float
-    ctx.translate(0, -cameraY);
-
-    drawTree();
-
-    //player drawing now
-    ctx.fillStyle = "#e8e4dc";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-
-    ctx.restore();
+    ctx.fillStyle = "#ff00ff";
+    ctx.fillRect(0, 0, 160, 240);
 }
 
 function gameLoop() {
