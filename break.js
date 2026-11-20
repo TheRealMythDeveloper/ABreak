@@ -51,7 +51,7 @@ function checkforscroll() {
     thoughts.forEach(thought => {
         const position = thought.getBoundingClientRect();
 
-        if (position.top < window.innerHeight * 0.8) {
+        if (position.top < window.innerHeight * 1.8) {
             thought.classList.add("AfterScroll");
 
          }     

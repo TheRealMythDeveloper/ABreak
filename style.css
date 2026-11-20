@@ -48,7 +48,7 @@ body {
 }
 
 #game {
-    height: 100vh;
+    height: fit-content;
     overflow: -moz-hidden-unscrollable;
     position:relative;
     background: #b8d2a8
@@ -66,4 +66,4 @@ body {
     image-rendering: pixelated;
     display: block;
    }
-  
+   
