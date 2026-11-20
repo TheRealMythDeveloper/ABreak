@@ -2,13 +2,13 @@
 const platforms = [
     {y:180, gapStart: 82, gapWidth:34},
     { y:260, gapStart:24, gapWidth:36},
-    { y:550, gapStart:100, gapWidth,32},
+    { y:550, gapStart:100, gapWidth:32},
     {y:740, gapStart:48, gapWidth:35},
-    {y:940, gapStart:90,gapWidth,38},
+    {y:940, gapStart:90,gapWidth:38},
     {y:1140, gapStart:18, gapWidth: 35},
     { y:1340, gapStart:75,gapWidth:36},
     {y:1760, gapStart:110, gapWidth:40},
-    {y:1980, gapStart:95, gapWidth, 36},
+    {y:1980, gapStart:95, gapWidth: 36},
     {y:2200, gapStart: 45, gapWidth: 45}
 ];
 
@@ -16,7 +16,7 @@ platforms.forEach(platform => {
     const leftEnd = platform.gapStart;
     const rightStart = platform.gapStart + platform.gapWidth;
 
-    ctx.fillStyle = "#a117b4d";
+    ctx.fillStyle = "#a17b4d";
     //left side
     ctx.fillRect(12, platform.y, leftEnd - 12, 0);
     
@@ -30,7 +30,7 @@ platforms.forEach(platform => {
 });
 
 //now collisison with these
-const platformCollision = platform.flatMap(platform => {
+const platformCollision = platforms.flatMap(platform => {
     const leftWidth = platform.gapStart - 12;
     const rightX = platform.gapStart + platform.gapWidth;
     const rightWidth = 148 - rightX;
