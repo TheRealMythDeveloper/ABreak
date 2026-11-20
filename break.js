@@ -12,6 +12,14 @@ const platforms = [
     {y:2200, gapStart: 45, gapWidth: 45}
 ];
 
+
+const canvas = document.getElementById("treeCanvas");
+const ctx = canvas.getContext("2d");
+
+ctx.imageSmoothingEnabled = false;
+
+
+
 platforms.forEach(platform => {
     const leftEnd = platform.gapStart;
     const rightStart = platform.gapStart + platform.gapWidth;
@@ -44,16 +52,11 @@ return [
     {
         x: rightX,
         y:platform.y,
-        width:rightWidth,
+        width:rightWidth, 
         height: 8
     }
 ].filter(piece => piece.width > 0);
 });
-
-const canvas = document.getElementById("treeCanvas");
-const ctx = canvas.getContext("2d");
-
-ctx.imageSmoothingEnabled = false;
 
 //Outside layer
 ctx.fillStyle = "#59402c";
