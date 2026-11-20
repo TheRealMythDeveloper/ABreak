@@ -23,5 +23,5 @@ $(document).ready(function(){
      s.removeClass("AfterScroll");
    }
  });
-});
-   
+});  
+     
