@@ -56,6 +56,7 @@ let cameraY = 0;
 const keys = {};
 
 function updatePlayer() {
+    const oldBottom = player.y + player.height;
     //horizontal so A D
     if(keys["a"] || keys["ArrowLeft"]) {
         player.x -= player.speed;
@@ -79,7 +80,8 @@ function updatePlayer() {
 
  if (player.velocityY >= 0) {
     for (const platform of platformCollision){
-        const playerBottom = player.x + player.height;
+        player.grounded = false;
+        const playerBottom = player.y + player.height;
         const overlapsX = 
         player.x + player.width > platform.x &&
         player.x < platform.x + platform.width;
@@ -115,7 +117,7 @@ function updateCameratoplayer() {
     cameraY = player.y -120;
     
     cameraY = Math.max(0, 
-        Math.min(cameraY, world_height, veiw_height));
+        Math.min(cameraY, world_height - veiw_height));
 
 }
  
@@ -136,12 +138,12 @@ window.addEventListener("keydown", event => {
 
 //now collisison with these
 const platformCollision = platforms.flatMap(platform => {
-    const leftWidth = platform.gapStart - 12;
+    const leftWidth = platform.gapStart - 16;
     const rightX = platform.gapStart + platform.gapWidth;
-    const rightWidth = 148 - rightX;
+    const rightWidth = 144 - rightX;
 return [
     {
-        x:12,
+        x:16,
         y: platform.y,
         width:leftWidth,
         height: 8, 
@@ -157,19 +159,7 @@ return [
 
 
 
-//TEE it must be an ENT
-for (let i = 0; i < 1000; i++) {
-    const x = Math.random() *160;
-    const y = Math.random() * 2400;
 
-    if (x<12 || x>140) {
-        ctx.fillStyle = Math.random() > 0.5
-        ? "#a17b4d"
-        : "#493522"
-        ;
-        ctx.fillRect(x ,y , 2, Math.random() * 8 + 2);
-    }
-}
 
 
 //get list of all hidden text
@@ -187,7 +177,7 @@ function checkforscroll() {
 
     });
 
-}
+} 
 
 
 
@@ -214,6 +204,10 @@ ctx.fillRect(12,0,136,world_height);
 ctx.fillStyle = "#68472f";
 ctx.fillRect(12,0,4,world_height);
 ctx.fillRect(144, 0, 4, world_height);
+barkDetails.forEach(detail => {
+    ctx.fillStyle = detail.color;
+    ctx.fillRect(detail.x, detail.y, 2, detail.height);
+});
 
 platforms.forEach(platform => {
     const leftEnd = platform.gapStart;
@@ -221,16 +215,34 @@ platforms.forEach(platform => {
 
     ctx.fillStyle = "#a17b4d";
     //left side
-    ctx.fillRect(12, platform.y, leftEnd - 12, 0);
+    ctx.fillRect(12, platform.y, leftEnd - 16, 8);
     
     //right side
-    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 8);
+    ctx.fillRect(rightStart, platform.y, 144 - rightStart, 8);
 
     //top coloirng
     ctx.fillStyle = "#c29a61";
-    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 2);
-    ctx.fillRect(12, platform.y, leftEnd -12, 2);
+    ctx.fillRect(16, platform.y, leftEnd -16, 2);
+  ctx.fillRect(rightStart, platform.y, 144 - rightStart, 2);
 });
+}
+
+const barkDetails = [];
+
+//TEE it must be an ENT
+for (let i = 0; i < 1000; i++) {
+    const x = Math.random() * world_width;
+    const y = Math.random() * world_height;
+
+    if (x<12 || x>140) {
+        barkDetails.push({
+        ctx.fillStyle = Math.random() > 0.5
+        ? "#a17b4d"
+        : "#493522"
+        ;
+        ctx.fillRect(x ,y , 2, Math.random() * 8 + 2);
+        });
+    }
 }
 
 //should repeat all drawings
@@ -254,9 +266,9 @@ function drawGame() {
 
 function gameLoop() {
     updatePlayer();
-    updateCamera();
+    updateCameratoplayer();
     drawGame();
-    requestAniamtionFrame(gameLoop);
+    requestAnimationFrame(gameLoop);
 }
 
 gameLoop();
