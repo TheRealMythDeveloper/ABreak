@@ -1,41 +1,138 @@
 
-const platforms = [
-    {y:180, gapStart: 82, gapWidth:34},
-    { y:260, gapStart:24, gapWidth:36},
-    { y:550, gapStart:100, gapWidth:32},
-    {y:740, gapStart:48, gapWidth:35},
-    {y:940, gapStart:90,gapWidth:38},
-    {y:1140, gapStart:18, gapWidth: 35},
-    { y:1340, gapStart:75,gapWidth:36},
-    {y:1760, gapStart:110, gapWidth:40},
-    {y:1980, gapStart:95, gapWidth: 36},
-    {y:2200, gapStart: 45, gapWidth: 45}
-];
-
-
 const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 
 ctx.imageSmoothingEnabled = false;
 
+const world_width = 160;
+const world_height = 6000;
+const veiw_height = 240;
+const veiw_width = 160;
+canvas.width = veiw_width;
+canvas.height = veiw_height;
 
 
-platforms.forEach(platform => {
-    const leftEnd = platform.gapStart;
-    const rightStart = platform.gapStart + platform.gapWidth;
+const platforms = [
+ {y: 180, gapStart: 82, gapWidth: 34 },
+    {y: 340, gapStart: 24, gapWidth:36 },
+    { y: 550, gapStart: 100, gapWidth: 32 },
+    { y: 740, gapStart: 48, gapWidth:35 },
+    { y: 940, gapStart: 90, gapWidth: 38 },
+    { y: 1140, gapStart: 18,gapWidth: 35 },
+    { y: 1340, gapStart: 75,gapWidth: 36 },
+    { y: 1540, gapStart: 110, gapWidth:40 },
+    {y: 1760, gapStart: 35, gapWidth: 40 },
+    { y: 1980,gapStart: 95, gapWidth: 36 },
+ { y: 2200, gapStart: 45, gapWidth:45 },
+     {y: 2450,gapStart: 110, gapWidth: 32 },
+    { y: 2680, gapStart: 30,gapWidth: 40 },
+    {y: 2920, gapStart: 78, gapWidth: 34 },
+    { y: 3180, gapStart: 18, gapWidth: 38 },
+   {y: 3450, gapStart: 100, gapWidth: 35 },
+    { y: 3720, gapStart: 50, gapWidth:38 },
+    { y: 3980,gapStart: 115, gapWidth: 30 },
+    { y: 4250, gapStart: 35, gapWidth: 42 },
+    { y: 4520, gapStart: 85, gapWidth: 35 },
+    { y: 4800, gapStart: 20, gapWidth:40 },
+    { y: 5100,gapStart: 105, gapWidth: 32 },
+    { y: 5400, gapStart: 45, gapWidth: 40 },
+    { y: 5700,gapStart: 90,gapWidth:36 }
+];
 
-    ctx.fillStyle = "#a17b4d";
-    //left side
-    ctx.fillRect(12, platform.y, leftEnd - 12, 0);
+const player = {
+    x: 48,
+    y: 70,
+    width: 6,
+    height:10,
+    speed: 1.5,
+    velocityY: 0,
+    jumpPower: -4,
+    gravity: 0.08,
+grounded:false
+};
+
+
+let cameraY = 0;
+const keys = {};
+
+function updatePlayer() {
+    //horizontal so A D
+    if(keys["a"] || keys["ArrowLeft"]) {
+        player.x -= player.speed;
+    }
+    if (keys["d"] || keys["ArrowRight"]) {
+        player.x += player.speed;
     
-    //right side
-    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 8);
+    }
 
-    //top coloirng
-    ctx.fillStyle = "#c29a61";
-    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 2);
-    ctx.fillRect(12, platform.y, leftEnd -12, 2);
+    player.x = Math.max(16, Math.min(139, player.x))
+    //jumping, but not high enough to reach the last tree opening hopefully
+    if ((keys[" "] || keys["w"] || keys["ArrowUp"]) && player.grounded) {
+        player.velocityY = player.jumpPower;
+        player.grounded = false;
+
+    }
+ //gravittty
+
+ player.velocityY += player.gravity;
+ player.y += player.velocityY;
+
+ if (player.velocityY >= 0) {
+    for (const platform of platformCollision){
+        const playerBottom = player.x + player.height;
+        const overlapsX = 
+        player.x + player.width > platform.x &&
+        player.x < platform.x + platform.width;
+
+        const crossesPlatforms = 
+        oldBottom <= platform.y &&
+        playerBottom >= platform.y;
+
+        if (overlapsX && crossesPlatform) {
+            player.y = platform.y - player.height;
+
+            player.velocityY = 0;
+            player.grounded = true;
+            break;
+        }
+    }
+ }
+}
+
+//keeeeeyss
+window.addEventListener("keydown", event => {
+    keys[event.key] = true;
+
 });
+window.addEventListener("keyup", event => {
+keys[event.key] = false;
+}
+);
+
+//camera
+
+function updateCameratoplayer() {
+    cameraY = player.y -120;
+    
+    cameraY = Math.max(0, 
+        Math.min(cameraY, world_height, veiw_height));
+
+}
+ 
+
+
+window.addEventListener("wheel", event => {
+    event.preventDefault();
+},
+{passive: false});
+
+window.addEventListener("keydown", event => {
+    if (["ArrowUp", "ArrowDown", "ArrowLeft","ArrowRight", " "].includes(event.key)) {
+    event.preventDefault();
+    }
+});
+
+
 
 //now collisison with these
 const platformCollision = platforms.flatMap(platform => {
@@ -47,7 +144,7 @@ return [
         x:12,
         y: platform.y,
         width:leftWidth,
-        height: 8,
+        height: 8, 
     },
     {
         x: rightX,
@@ -58,27 +155,7 @@ return [
 ].filter(piece => piece.width > 0);
 });
 
-//Outside layer
-ctx.fillStyle = "#59402c";
-ctx.fillRect(0,0,160,2400);
 
-//Bark
-ctx.fillStyle = "#795332";
-ctx.fillRect(0,0,12,2400);
-ctx.fillRect(148,0,12,2400);
-
-//more bark
-ctx.fillStyle = "#936b43";
-ctx.fillRect(0,0,4,2400); 
-ctx.fillRect(161,0,3,2400);
- 
-//hollow for the inside
-ctx.fillStyle = "#3e3025";
-ctx.fillRect(12,0,136,2400);
-
-ctx.fillStyle = "#68472f";
-ctx.fillRect(12,0,4,2400);
-ctx.fillRect(144, 0, 4, 2400);
 
 //TEE it must be an ENT
 for (let i = 0; i < 1000; i++) {
@@ -112,6 +189,74 @@ function checkforscroll() {
 
 }
 
-window.addEventListener("scroll", checkforscroll);
 
-checkforscroll();  
+
+//tree isnt big enough..
+function drawTree() {
+    //Outside layer
+ctx.fillStyle = "#59402c";
+ctx.fillRect(0,0,world_width,world_height);
+
+//Bark
+ctx.fillStyle = "#795332";
+ctx.fillRect(0,0,12,world_height);
+ctx.fillRect(148,0,12,world_height);
+
+//more bark
+ctx.fillStyle = "#936b43";
+ctx.fillRect(0,0,4,world_height); 
+ctx.fillRect(161,0,3,world_height);
+ 
+//hollow for the inside
+ctx.fillStyle = "#3e3025";
+ctx.fillRect(12,0,136,world_height);
+
+ctx.fillStyle = "#68472f";
+ctx.fillRect(12,0,4,world_height);
+ctx.fillRect(144, 0, 4, world_height);
+
+platforms.forEach(platform => {
+    const leftEnd = platform.gapStart;
+    const rightStart = platform.gapStart + platform.gapWidth;
+
+    ctx.fillStyle = "#a17b4d";
+    //left side
+    ctx.fillRect(12, platform.y, leftEnd - 12, 0);
+    
+    //right side
+    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 8);
+
+    //top coloirng
+    ctx.fillStyle = "#c29a61";
+    ctx.fillRect(rightStart, platform.y, 148 - rightStart, 2);
+    ctx.fillRect(12, platform.y, leftEnd -12, 2);
+});
+}
+
+//should repeat all drawings
+
+function drawGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.save();
+
+    //camera so it doesnt float
+    ctx.translate(0, -cameraY);
+
+    drawTree();
+
+    //player drawing now
+    ctx.fillStyle = "#e8e4dc";
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    ctx.restore();
+}
+
+function gameLoop() {
+    updatePlayer();
+    updateCamera();
+    drawGame();
+    requestAniamtionFrame(gameLoop);
+}
+
+gameLoop();
