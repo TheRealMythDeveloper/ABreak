@@ -4,12 +4,60 @@
   height: 100px; 
   width: 100%; 
   display: none;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
 }
 
 
 .AfterScroll
 {
+    opacity: 1;
+    transform:translateY(0);
   height: 100px; 
   width: 100%; 
   display: block;
 }
+
+#story {
+    text-align: center;
+    padding: 15vh 20px;
+
+}
+
+#story div {
+    min-height: 85vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(20px,3vw, 32px);
+    font-family: Georgia, serif;
+    color: #596d52;
+    padding:30px;
+}
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background: #e8e6d5;
+    font-family: Georgia,serif;
+    color: #5b6552
+
+}
+
+#game {
+    height: 100vh;
+    overflow: -moz-hidden-unscrollable;
+    position:relative;
+    background: #b8d2a8
+}
+
+#world {
+    position:absolute;
+    inset:0;
+    background-color: #b8d2a8;
+
+}
+
