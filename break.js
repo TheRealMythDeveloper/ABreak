@@ -65,6 +65,7 @@ function updatePlayer() {
         player.x += player.speed;
     
     }
+alert("break.js is running!");
 
     player.x = Math.max(16, Math.min(139, player.x))
     //jumping, but not high enough to reach the last tree opening hopefully
@@ -117,6 +118,7 @@ function updateCameratoplayer() {
     
     cameraY = Math.max(0, 
         Math.min(cameraY, world_height - veiw_height));
+alert("break.js is running!");
 
 }
  
@@ -168,6 +170,7 @@ const thoughts = document.querySelectorAll(".BeforeScroll");
 function checkforscroll() {
     thoughts.forEach(thought => {
         const position = thought.getBoundingClientRect();
+alert("break.js is running!");
 
         if (position.top < window.innerHeight * 1.8) {
             thought.classList.add("AfterScroll");
@@ -181,6 +184,7 @@ function checkforscroll() {
 
 
 //tree isnt big enough..
+alert("break.js is running!");
 function drawTree() {
     //Outside layer
 ctx.fillStyle = "#59402c";
@@ -232,6 +236,7 @@ const barkDetails = [];
 for (let i = 0; i < 1000; i++) {
     const x = Math.random() * world_width;
     const y = Math.random() * world_height;
+alert("break.js is running!");
 
     if (x<12 || x>140) {
         barkDetails.push({
@@ -258,7 +263,10 @@ function gameLoop() {
     updatePlayer();
     updateCameratoplayer();
     drawGame();
+alert("break.js is running!");
+
     requestAnimationFrame(gameLoop);
 }
 
+alert("break.js is running!");
 gameLoop();
