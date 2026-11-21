@@ -44,9 +44,9 @@ const player = {
     y: 70,
     width: 6,
     height:10,
-    speed: 0.5,
+    speed: 0.8,
     velocityY: 0,
-    jumpPower: -7,
+    jumpPower: -2,
     gravity: 0.08,
 grounded:false
 };  
