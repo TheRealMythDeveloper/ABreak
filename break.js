@@ -4,7 +4,7 @@ const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 let veiw_height = window.innerHeight;
 let veiw_width = window.innerWidth;
-const world_width = 5000;
+const world_width = 10000;
 const world_height = 250;
 let groundY = veiw_height - 55;
 
@@ -190,7 +190,7 @@ if (dialogueIndex !== currentDialouge) {
     storyText.textContent = dialogue[dialogueIndex];
 }
 
-
+ 
 } 
 
  
