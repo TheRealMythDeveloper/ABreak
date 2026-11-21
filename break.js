@@ -164,7 +164,7 @@ function drawGame() {
     ctx.restore();
 }
 
-function gameLoop() {
+function gameLoop() { 
     updatePlayer();
     updateCameratoplayer();
     checkforscroll(); //work.. pls
