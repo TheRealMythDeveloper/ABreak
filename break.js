@@ -33,7 +33,7 @@ const player = {
     y: groundY - 40,
     width: 24,
     height:40,
-    speed: 2,
+    speed: 3,
     velocityY: 0,
     jumpPower: -3,
     gravity: 0.15,
@@ -121,9 +121,11 @@ const thoughts = document.querySelectorAll(".BeforeScroll");
 function checkforscroll() {
 thoughts.forEach((thought, i) => {
 
-if(player.x > i*400) {
+if(player.x > i*400 && player.x <  (i+1) * 400) {
     thought.classList.add("AfterScroll");
 
+} else {
+    throught.classList.remove("AfterScroll");
 }
 });
 }
