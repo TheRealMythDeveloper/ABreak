@@ -15,7 +15,7 @@ function drawTree() {
     ctx.fillStyle = "#795332";
     ctx.fillRect(0, 0, 12, world_height);
     ctx.fillRect(148, 0, 12, world_height);
-
+ 
     ctx.fillStyle = "#3e3025";
     ctx.fillRect(12, 0, 136, world_height);
     // Bark highlights
@@ -26,7 +26,7 @@ ctx.fillRect(152, 0, 4, world_height);
 ctx.fillStyle = "#68472f";
 ctx.fillRect(12, 0, 4, world_height);
 ctx.fillRect(144, 0, 4, world_height);
-drawTree(); 
 
 
 }
+drawTree(); 
