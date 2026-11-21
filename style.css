@@ -95,3 +95,21 @@ z-index:5;
    #controllerPrompt
   { margin: 4px 0;}
 
+
+
+#game{
+        height: 720px;
+    width: 480px;
+    overflow: hidden;
+    position: relative;
+    background: #b8d2a8;
+    margin: auto;
+}
+
+#world {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #b8d2a8;
+}
