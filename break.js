@@ -9,7 +9,7 @@ const world_height = 250;
 const veiw_height = 250;
 const veiw_width = 160;
 canvas.width = veiw_width;
-canvas.height = veiw_height;
+canvas.height = veiw_height; 
 
 
 
@@ -95,27 +95,6 @@ window.addEventListener("keydown", event => {
 
 
 
-//now collisison with these
-const platformCollision = platforms.flatMap(platform => {
-    const leftWidth = platform.gapStart - 16;
-    const rightX = platform.gapStart + platform.gapWidth;
-    const rightWidth = 144 - rightX;
-return [
-    {
-        x:16,
-        y: platform.y,
-        width:leftWidth,
-        height: 8, 
-    },
-    {
-        x: rightX,
-        y:platform.y,
-        width:rightWidth, 
-        height: 8
-    }
-].filter(piece => piece.width > 0);
-});
-
 
  
 
@@ -134,7 +113,7 @@ if(player.x > i*400) {
 }
 });
 }
-
+ 
 
 //trying a world instead
  function drawWorld() {
