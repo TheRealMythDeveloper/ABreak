@@ -33,9 +33,9 @@ const player = {
     y: groundY - 40,
     width: 24,
     height:40,
-    speed: 3,
+    speed: 5,
     velocityY: 0,
-    jumpPower: -3,
+    jumpPower: -5,
     gravity: 0.15,
 grounded:true
 };  
@@ -122,9 +122,10 @@ function checkforscroll() {
     const section = Math.floor(player.x /400);
     document.getElementById("debugInfo").textContent = 
     "Player X:"  + Math.floor(player.x) + "| section:" + section;
+
 thoughts.forEach((thought, i) => {
 
-if(player.x > i*400 && player.x <  (i+1) * 400) {
+if(i == section) {
     thought.classList.add("AfterScroll");
 
 } else {
@@ -132,6 +133,7 @@ if(player.x > i*400 && player.x <  (i+1) * 400) {
 }
 });
 }
+
  
 
 //trying a world instead

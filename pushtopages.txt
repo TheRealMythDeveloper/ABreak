@@ -268,3 +268,17 @@ function gameLoop() {
 }
 
 gameLoop();     
+
+
+
+function checkforscroll() {
+    const section = Math.floor(player.x / 400);
+
+    thoughts.forEach((thought, i) => {
+        if (i === section) {
+            thought.classList.add("AfterScroll");
+        } else {
+            thought.classList.remove("AfterScroll");
+        }
+    });
+}
