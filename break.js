@@ -190,7 +190,7 @@ ctx.fillRect(0,0,world_width,world_height);
 ctx.fillStyle = "#795332";
 ctx.fillRect(0,0,12,world_height);
 ctx.fillRect(148,0,12,world_height);
-
+ 
 //more bark
 ctx.fillStyle = "#936b43";
 ctx.fillRect(0,0,4,world_height); 
