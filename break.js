@@ -198,7 +198,7 @@ ctx.fillRect(152,0,3,world_height);
  
 //hollow for the inside
 ctx.fillStyle = "#3e3025";
-ctx.fillRect(12,0,136,world_height);
+ctx.fillRect(35, 0, 90, world_height);
 
 ctx.fillStyle = "#68472f";
 ctx.fillRect(12,0,4,world_height);
@@ -249,7 +249,7 @@ height: Math.random() * 8+2
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+ 
     ctx.save();
     ctx.translate(0, -cameraY);
 

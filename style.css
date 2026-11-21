@@ -57,7 +57,7 @@ body {
    }
    
    #controllerPrompt {
-position: absolute;
+position: absolute; 
 top: 15px;
 left: 15px;
 padding: 12px 16px;
