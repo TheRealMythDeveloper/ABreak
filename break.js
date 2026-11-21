@@ -51,7 +51,7 @@ const player = {
 grounded:false
 };  
 
-
+ 
 let cameraY = 0;
 const keys = {};
 
