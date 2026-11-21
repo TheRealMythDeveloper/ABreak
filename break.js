@@ -4,10 +4,10 @@ const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-const world_width = 160;
+const world_width = 350;
 const world_height = 6000;
-const veiw_height = 240;
-const veiw_width = 160;
+const veiw_height = 350;
+const veiw_width = 300;
 canvas.width = veiw_width;
 canvas.height = veiw_height;
 
