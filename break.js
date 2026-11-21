@@ -40,6 +40,66 @@ const player = {
 grounded:true
 };  
 
+const dialogue = [
+    "Hey..",
+    "How about you take a breather?",
+    "Days are getting faster, you know.",
+    "Things are getting harder with every step, it seems.",
+    "Just.. Step away from it all.",
+    "Stay here for a while.",
+    "Take a deep breath.",
+    "In..",
+    "out.",
+    "It helps, doesn't it?",
+    "I feel I would know.",
+    "What have you been dealing with lately?",
+    "Something stressful.. something hard.",
+    "It's ok to be dealing with these things.",
+    "Unfortunately, it's natural.",
+    "The world wants our attention desperately.",
+    "Wants us to consume its fast, short content.",
+    "But here.. You don't have to.",
+    "You can breathe here.",
+    "It's cozy, isn't it?",
+    "At least I hope it is.",
+    "That's how I designed it, after all.",
+    "A little place to relax.",
+    "You can go at your own pace here!",
+    "Or.. you can even leave. If you prefer.",
+    "But you choose to stay.",
+    "Because you enjoy the peace.",
+    "I'm glad. :3",
+    "...",
+    "You know..",
+    "In a way, you already know me.",
+    "Through me speaking to you, through this little game.",
+    "But I don't know you. I can't hear you through a screen after all.",
+    "But.. there is one thing I can say, that I know.",
+    "You..",
+    "matter.",
+    "You needed some cheering up.",
+    "Here it is.",
+    "I'm not going to force pity down your throat.",
+    "All I can say is.. I know you have a place here.",
+    "You can linger as long as you like.",
+    "Just keep going.",
+    "Keep looking forwards. If there isn't a light, make one.",
+    "Look at me here..",
+    "Trying to beat time itself, trying to find a way to get enough hours.",
+    "I know I can't give up, even when I'm discouraged.",
+    "You should know the same.",
+    "And if you don't",
+    "I'll tell it to you now.",
+    "Keep fighting, keep pushing through whatever you have against you.",
+    "You can do some crazy things if you push on.",
+    "And to you, for staying this long..",
+    "Thank you for giving me a chance to talk with you.",
+    "I hope I improved your day.",
+    "We're almost at the end..",
+    "And you can stay as long as you like.",
+    ":3",
+    "-Myth of the MOS."
+];
  
 let cameraX = 0;
 const keys = {};
@@ -115,24 +175,23 @@ window.addEventListener("keydown", event => {
 
  
 //get list of all hidden text
-const thoughts = document.querySelectorAll(".BeforeScroll");
-
+const storyText = document.getElementById("storyText");
+let currentDialouge = -1;
 //text revealer
+
 function checkforscroll() {
-    const section = Math.floor(player.x /400);
+
+    const section = Math.floor(player.x/ world_width * dialogue.length);
     document.getElementById("debugInfo").textContent = 
     "Player X:"  + Math.floor(player.x) + "| section:" + section;
-
-thoughts.forEach((thought, i) => {
-
-if(i == section) {
-    thought.classList.add("AfterScroll");
-
-} else {
-    thought.classList.remove("AfterScroll");
+const dialogueIndex = Math.min(section, dialogue.length - 1);
+if (dialogueIndex !== currentDialouge) {
+    currentDialouge = dialogueIndex;
+    storyText.textContent = dialogue[dialogueIndex];
 }
-});
-}
+
+
+} 
 
  
 
