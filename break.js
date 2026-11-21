@@ -5,7 +5,7 @@ const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
 const world_width = 3000;
-
+const world_height = 250;
 const veiw_height = 250;
 const veiw_width = 160;
 canvas.width = veiw_width;
