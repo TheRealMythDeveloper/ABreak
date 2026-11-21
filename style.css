@@ -1,7 +1,7 @@
 .BeforeScroll {
     height: 100px;
     width: 100%;
-    display: none;
+    visibility: hidden;
     opacity: 0;
     transform: translateY(25px);
     transition: opacity 1.2s ease, transform 1.2s ease;
@@ -12,7 +12,8 @@
     transform: translateY(0);
     height: 100px;
     width: 100%;
-    display: block;
+    visibility: visible;
+    
 }
 
 * {

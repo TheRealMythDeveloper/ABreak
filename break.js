@@ -13,30 +13,30 @@ canvas.height = veiw_height;
 
 
 const platforms = [
- {y: 180, gapStart: 82, gapWidth: 34 },
-    {y: 340, gapStart: 24, gapWidth:36 },
-    { y: 550, gapStart: 100, gapWidth: 32 },
-    { y: 740, gapStart: 48, gapWidth:35 },
-    { y: 940, gapStart: 90, gapWidth: 38 },
-    { y: 1140, gapStart: 18,gapWidth: 35 },
-    { y: 1340, gapStart: 75,gapWidth: 36 },
-    { y: 1540, gapStart: 110, gapWidth:40 },
-    {y: 1760, gapStart: 35, gapWidth: 40 },
-    { y: 1980,gapStart: 95, gapWidth: 36 },
- { y: 2200, gapStart: 45, gapWidth:45 },
-     {y: 2450,gapStart: 110, gapWidth: 32 },
-    { y: 2680, gapStart: 30,gapWidth: 40 },
-    {y: 2920, gapStart: 78, gapWidth: 34 },
-    { y: 3180, gapStart: 18, gapWidth: 38 },
-   {y: 3450, gapStart: 100, gapWidth: 35 },
-    { y: 3720, gapStart: 50, gapWidth:38 },
-    { y: 3980,gapStart: 115, gapWidth: 30 },
-    { y: 4250, gapStart: 35, gapWidth: 42 },
-    { y: 4520, gapStart: 85, gapWidth: 35 },
-    { y: 4800, gapStart: 20, gapWidth:40 },
-    { y: 5100,gapStart: 105, gapWidth: 32 },
-    { y: 5400, gapStart: 45, gapWidth: 40 },
-    { y: 5700,gapStart: 90,gapWidth:36 }
+ {y: 180, gapStart: 82, gapWidth: 23 },
+    {y: 340, gapStart: 24, gapWidth:26 },
+    { y: 550, gapStart: 100, gapWidth: 22 },
+    { y: 740, gapStart: 48, gapWidth:25 },
+    { y: 940, gapStart: 90, gapWidth: 28 },
+    { y: 1140, gapStart: 18,gapWidth: 25 },
+    { y: 1340, gapStart: 75,gapWidth: 26 },
+    { y: 1540, gapStart: 110, gapWidth:30 },
+    {y: 1760, gapStart: 35, gapWidth: 30 },
+    { y: 1980,gapStart: 95, gapWidth: 26 },
+ { y: 2200, gapStart: 45, gapWidth:35 },
+     {y: 2450,gapStart: 110, gapWidth: 22 },
+    { y: 2680, gapStart: 30,gapWidth: 30 },
+    {y: 2920, gapStart: 78, gapWidth: 24 },
+    { y: 3180, gapStart: 18, gapWidth: 28 },
+   {y: 3450, gapStart: 100, gapWidth: 25 },
+    { y: 3720, gapStart: 50, gapWidth:28 },
+    { y: 3980,gapStart: 115, gapWidth: 20 },
+    { y: 4250, gapStart: 35, gapWidth: 32 },
+    { y: 4520, gapStart: 85, gapWidth: 25 },
+    { y: 4800, gapStart: 20, gapWidth:30},
+    { y: 5100,gapStart: 105, gapWidth: 22 },
+    { y: 5400, gapStart: 45, gapWidth: 30 },
+    { y: 5700,gapStart: 90,gapWidth:26 }
 ];
 
 const player = {
@@ -44,9 +44,9 @@ const player = {
     y: 70,
     width: 6,
     height:10,
-    speed: 1.5,
+    speed: 0.5,
     velocityY: 0,
-    jumpPower: -4,
+    jumpPower: -7,
     gravity: 0.08,
 grounded:false
 };  
@@ -169,7 +169,7 @@ function checkforscroll() {
     thoughts.forEach(thought => {
         const position = thought.getBoundingClientRect();
 
-        if (position.top < window.innerHeight * 1.8) {
+        if (position.top < window.innerHeight * 0.5) {
             thought.classList.add("AfterScroll");
 
          }     
@@ -214,15 +214,15 @@ platforms.forEach(platform => {
 
     ctx.fillStyle = "#a17b4d";
     //left side
-    ctx.fillRect(16, platform.y, leftEnd - 16, 8);
+    ctx.fillRect(16, platform.y, leftEnd - 16, 12);
     
     //right side
-    ctx.fillRect(rightStart, platform.y, 144 - rightStart, 8);
+    ctx.fillRect(rightStart, platform.y, 144 - rightStart, 12);
 
     //top coloirng
     ctx.fillStyle = "#c29a61";
     ctx.fillRect(16, platform.y, leftEnd -16, 2);
-  ctx.fillRect(rightStart, platform.y, 144 - rightStart, 2);
+  ctx.fillRect(rightStart, platform.y, 144 - rightStart, 4);
 });
 }
 
@@ -260,7 +260,7 @@ function drawGame() {
 
     ctx.restore();
 }
-
+window.addEventListener("scroll", checkforscroll);
 function gameLoop() {
     updatePlayer();
     updateCameratoplayer();
