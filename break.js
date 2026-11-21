@@ -4,9 +4,9 @@ const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 
-const world_width = 350;
+const world_width = 200;
 const world_height = 6000;
-const veiw_height = 350;
+const veiw_height = 160;
 const veiw_width = 300;
 canvas.width = veiw_width;
 canvas.height = veiw_height;
@@ -166,18 +166,14 @@ const thoughts = document.querySelectorAll(".BeforeScroll");
 
 //text revealer
 function checkforscroll() {
-    thoughts.forEach(thought => {
-        const position = thought.getBoundingClientRect();
+thoughts.forEach((thought, i) => {
 
-        if (position.top < window.innerHeight * 0.8) {
-            thought.classList.add("AfterScroll");
+if(player.y > i*250) {
+    thought.classList.add("AfterScroll");
 
-         }     
-
-    }); 
-
-} 
-
+}
+});
+}
 
 
 //tree isnt big enough..
@@ -260,12 +256,12 @@ function drawGame() {
 
     ctx.restore();
 }
-window.addEventListener("scroll", checkforscroll);
-checkforscroll(); //work.. pls
 
 function gameLoop() {
     updatePlayer();
     updateCameratoplayer();
+    checkforscroll(); //work.. pls
+
     drawGame();
 
     requestAnimationFrame(gameLoop);
