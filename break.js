@@ -119,6 +119,9 @@ const thoughts = document.querySelectorAll(".BeforeScroll");
 
 //text revealer
 function checkforscroll() {
+    const section = Math.floor(player.x /400);
+    document.getElementById("debugInfo").textContent = 
+    "Player X:"  + Math.floor(player.x) + "| section:" + section;
 thoughts.forEach((thought, i) => {
 
 if(player.x > i*400 && player.x <  (i+1) * 400) {

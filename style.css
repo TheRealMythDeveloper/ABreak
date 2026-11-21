@@ -1,6 +1,5 @@
 .BeforeScroll {
-    height: 100px;
-    width: 100%;
+ 
     visibility: hidden;
     opacity: 0;
     transform: translateY(25px);
@@ -10,8 +9,7 @@
 .AfterScroll {
   opacity: 1;
     transform: translateY(0);
-    height: 100%;
-    width: 100%;
+  
     visibility: visible;
     
 } 
@@ -73,7 +71,7 @@ body {
     margin: 4px 0;
 }
 
-/* Story */
+/* Story */ 
 #story {
     text-align: center;
     padding: 15vh 20px;
@@ -87,7 +85,7 @@ body {
     justify-content: center;
     font-size: clamp(20px, 3vw, 32px);
     font-family: Georgia, serif;
-    color: #596d52;
+    color: #b0bcb8;
     padding: 30px;
 }
 
@@ -104,5 +102,16 @@ html, body {
 overflow-y: auto;
 pointer-events: none;
 z-index:10;
+}
+
+#debugInfo {
+    position:absolute;
+    top: 15px;
+    right:15px;
+    z-index:10;
+    color:white;
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+font-family: monospace;
 }
 
