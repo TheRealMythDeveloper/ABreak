@@ -7,7 +7,7 @@ ctx.imageSmoothingEnabled = false;
 const world_width = 200;
 const world_height = 6000;
 const veiw_height = 160;
-const veiw_width = 300;
+const veiw_width = 200;
 canvas.width = veiw_width;
 canvas.height = veiw_height;
 
@@ -267,4 +267,4 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-gameLoop();    
+gameLoop();     
