@@ -30,9 +30,9 @@ forest.src = "thehibiscuspoet-forest-saturated-export.jpg";
 
 const player = {
     x: 20,
-    y: groundY - 10,
-    width: 6,
-    height:10,
+    y: groundY - 40,
+    width: 24,
+    height:40,
     speed: 2,
     velocityY: 0,
     jumpPower: -3,
@@ -132,7 +132,12 @@ if(player.x > i*400) {
 //trying a world instead
  function drawWorld() {
 if (forest.complete && forest.naturalWidth >0) {
-    ctx.drawImage(forest,0,0, world_width, veiw_height);
+    const forestScale = veiw_height / forest.naturalHeight;
+    const forestWidth = forest.naturalWidth * forestScale;
+
+    for (let x = 0; x < world_width; x+= forestWidth) {
+    ctx.drawImage(forest, x,0, forestWidth, veiw_height);
+}
 }
 
 

@@ -30,9 +30,10 @@ body {
 /* The visible game window, x now*/
 #game {
     width: 100vw;
-    height: 500vh;
+    height: 100vh;
     position: fixed;
     margin: 0;
+    inset:0;
     overflow: hidden;
    
 }
