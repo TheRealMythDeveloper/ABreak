@@ -4,12 +4,12 @@ const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 let veiw_height = window.innerHeight;
 let veiw_width = window.innerWidth;
-const world_width = 10000;
+const world_width = 20000;
 const world_height = 250;
-let groundY = veiw_height - 55;
-
-
-
+let groundY = veiw_height - 55; 
+ 
+  
+   
 function resizeGame() {
     veiw_width = window.innerWidth;
     veiw_height = window.innerHeight;
@@ -243,3 +243,27 @@ function gameLoop() {
 }
 
 gameLoop();     
+
+const forestMusic = document.getElementById("forestMusic");
+const musicToggle = document.getElementById("musicToggle")
+;
+forestMusic.volume = 0.5;
+let musicPlaying = false;
+
+musicToggle.addEventListener("click", () => {
+    if (!musicPlaying) {
+        forestMusic.play().then(() => {
+        musicPlaying = true;
+        musicToggle.textContent = "Music: on"
+  ;   }).catch(error => {
+    musicToggle.textContent = "Music: Error";
+
+    
+    });
+    } else {
+        forestMusic.pause();
+        musicPlaying = false;
+        musicToggle.textContent = "Music: off";
+
+    }
+});
