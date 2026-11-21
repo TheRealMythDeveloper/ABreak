@@ -22,7 +22,7 @@
 
 body { 
     margin: 0;
-    background-image: "blue-sky-background-in-pixel-art-style-vector.webp";
+    background-image: url(blue-sky-background-in-pixel-art-style-vector.webp);
     font-family: Georgia, serif;
     color: #5b6552;
 }
