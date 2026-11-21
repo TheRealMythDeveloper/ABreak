@@ -92,3 +92,31 @@ z-index:5;
 
    #controllerPrompt p
   { margin: 4px 0;}
+
+
+  #game {
+    width: 480px;
+    height: 720px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    background: #b8d2a8;
+}
+
+#world {
+    position: absolute;
+    width: 100%;
+    height: 6000px;
+    top: 0;
+    left: 0;
+    background-color: #b8d2a8;
+}
+
+#treeCanvas {
+    width: 480px;
+    height: 6000px;
+    image-rendering: pixelated;
+    display: block;
+}
+
+/*more changes.*/
