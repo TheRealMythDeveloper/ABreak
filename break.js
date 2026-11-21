@@ -2,27 +2,41 @@
 
 const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
-ctx.imageSmoothingEnabled = false;
-
-const world_width = 3000;
+let veiw_height = window.innerHeight;
+let veiw_width = window.innerWidth;
+const world_width = 5000;
 const world_height = 250;
-const veiw_height = 250;
-const veiw_width = 160;
+let groundY = veiw_height - 55;
+
+
+
+function resizeGame() {
+    veiw_width = window.innerWidth;
+    veiw_height = window.innerHeight;
+    groundY = veiw_height - 55;
 canvas.width = veiw_width;
 canvas.height = veiw_height; 
+ctx.imageSmoothingEnabled = false;
+}
+
+resizeGame();
+
+const forest = new Image();
+
+forest.src = "thehibiscuspoet-forest-saturated-export.jpg";
 
 
 
 
 const player = {
     x: 20,
-    y: 210,
+    y: groundY - 10,
     width: 6,
     height:10,
-    speed: 1,
+    speed: 2,
     velocityY: 0,
-    jumpPower: -2,
-    gravity: 0.08,
+    jumpPower: -3,
+    gravity: 0.15,
 grounded:true
 };  
 
@@ -52,8 +66,8 @@ function updatePlayer() {
 
  player.velocityY += player.gravity;
  player.y += player.velocityY;
-if (player.y + player.height >= 220) {
-    player.y = 220 - player.height;
+if (player.y + player.height >= groundY) {
+    player.y = groundY - player.height;
     player.velocityY = 0;
     player.grounded = true;
 }
@@ -117,14 +131,18 @@ if(player.x > i*400) {
 
 //trying a world instead
  function drawWorld() {
-    ctx.fillStyle = "#b8d2a8";
-    ctx.fillRect(0,0,world_width,veiw_height);
+if (forest.complete && forest.naturalWidth >0) {
+    ctx.drawImage(forest,0,0, world_width, veiw_height);
+}
 
-    ctx.fillStyle = "#59402c";
-    ctx.fillRect(0,220,world_width,30);
 
-    ctx.fillStyle = "#829968";
-    ctx.fillRect(0,220,world_width,4);
+ctx.fillStyle = "#29251f";
+
+ctx.fillRect(0, groundY, world_width, veiw_height - groundY);
+
+  ctx.fillStyle = "#393128";
+  ctx.fillRect(0,groundY, world_width, 5);
+
 
  }
 
