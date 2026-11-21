@@ -89,7 +89,7 @@ player.grounded = false;
         oldBottom <= platform.y &&
         playerBottom >= platform.y;
 
-        if (overlapsX && crossesPlatform) {
+        if (overlapsX && crossesPlatforms) {
             player.y = platform.y - player.height;
 
             player.velocityY = 0;
@@ -117,7 +117,7 @@ function updateCameratoplayer() {
     
     cameraY = Math.max(0, 
         Math.min(cameraY, world_height - veiw_height));
-
+ 
 }
  
 
@@ -249,8 +249,16 @@ height: Math.random() * 8+2
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ff00ff";
-    ctx.fillRect(0, 0, 160, 240);
+
+    ctx.save();
+    ctx.translate(0, -cameraY);
+
+    drawTree();
+
+    ctx.fillStyle = "#e8e4dc";
+    ctx.fillRect(player.x, player.y, player.width, player.height);
+
+    ctx.restore();
 }
 
 function gameLoop() {
@@ -261,4 +269,4 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-gameLoop();
+gameLoop(); 
