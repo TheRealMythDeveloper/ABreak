@@ -6,7 +6,7 @@ ctx.imageSmoothingEnabled = false;
 
 const world_width = 160;
 const world_height = 6000;
-const veiw_height = 300;
+const veiw_height = 800;
 const veiw_width = 160;
 canvas.width = veiw_width;
 canvas.height = veiw_height;
