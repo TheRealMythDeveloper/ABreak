@@ -113,7 +113,7 @@ window.addEventListener("keydown", event => {
  
 
 
-
+ 
 //get list of all hidden text
 const thoughts = document.querySelectorAll(".BeforeScroll");
 
@@ -125,7 +125,7 @@ if(player.x > i*400 && player.x <  (i+1) * 400) {
     thought.classList.add("AfterScroll");
 
 } else {
-    throught.classList.remove("AfterScroll");
+    thought.classList.remove("AfterScroll");
 }
 });
 }
