@@ -1,7 +1,7 @@
 
+alert("break.js is running!");
 const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
-
 ctx.imageSmoothingEnabled = false;
 
 const world_width = 160;
@@ -249,7 +249,7 @@ height: Math.random() * 8+2
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+alert("break.js is running!");
     ctx.fillStyle = "#ff00ff";
     ctx.fillRect(0, 0, 160, 240);
 }
