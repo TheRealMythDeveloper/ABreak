@@ -46,30 +46,27 @@ body {
     color: #5b6552
 
 }
-
 #game {
-    height: 720px;
-    width: 480px;
-    overflow: hidden;
-    position: relative;
-    background: #b8d2a8;
+    height: fit-content;
+    overflow: -moz-hidden-unscrollable;
+    position:relative;
+    background: #b8d2a8; 
     margin: auto;
+    overflow: hidden;
 }
-
 #world {
-    position: absolute;
-    inset: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
     background-color: #b8d2a8;
 }
-   #treeCanvas{
-    width: 100%;
-    height: 7200px;
+
+#treeCanvas {
+    width: 480px;
+    height: 720px;
     image-rendering: pixelated;
     display: block;
-   }
-   
+}
+  
 
 
    html, body{
