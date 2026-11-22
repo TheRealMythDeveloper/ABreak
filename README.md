@@ -20,7 +20,7 @@ As you travel through the forest, dialogue gradually unfolds. The world contains
   A long, peaceful walk.
 - *platforming elements*
   for you to enjoy as you listen and watch.
-- *ambient music*
+- *ambient music* 
   Optional music to accompany your journey.
 
 ## Built With
