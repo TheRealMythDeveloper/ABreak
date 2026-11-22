@@ -39,8 +39,8 @@ const animationSpeed = 8;
 const player = {
     x: 40,
     y: groundY - 40,
-    width: 48,
-    height:40,
+    width: frameWidth,
+    height:frameHeight,
     speed: 5,
     velocityY: 0,
     jumpPower: -5,
