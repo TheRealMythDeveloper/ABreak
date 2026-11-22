@@ -43,27 +43,72 @@ const player = {
     height:frameHeight - 50,
     speed: 4,
     velocityY: 0,
-    jumpPower: -5,
+    jumpPower: -6,
     gravity: 0.15,
 grounded:true
 };  
 
 const hole = [
-    { start: 1400, end: 1650 },
-    { start: 3800, end: 4150 },
-    { start: 6700, end: 7100 },
-    { start: 10200, end: 10600 },
-    { start: 14800, end: 15250 },
-    { start: 19500, end: 19900 }
+    { start: 1550, end: 1800 },
+    { start: 4300, end: 4700 },
+    { start: 7200, end: 7550 },
+    { start: 9600, end: 10150 },
+    { start: 13200, end: 13450 },
+    { start: 16100, end: 16700 },
+    { start: 18700, end: 19050 },
+    { start: 21600, end: 22000 },
+    { start: 23900, end: 24150 }
 ];
 
 const springboard = [
-    { x: 1280, width: 70, height: 16, bouncePower: -10 },
-    { x: 3650, width: 70, height: 16, bouncePower: -10 },
-    { x: 6500, width: 70, height: 16, bouncePower: -11 },
-    { x: 9900, width: 70, height: 16, bouncePower: -11 },
-    { x: 14500, width: 70, height: 16, bouncePower: -12 },
-    { x: 19200, width: 70, height: 16, bouncePower: -12 }
+    { x: 1380, width: 85, height: 16, bouncePower: -10 },
+    { x: 4050, width: 85, height: 16, bouncePower: -10 },
+    { x: 6900, width: 85, height: 16, bouncePower: -11 },
+    { x: 9450, width: 85, height: 16, bouncePower: -11 },
+    { x: 13000, width: 85, height: 16, bouncePower: -10 },
+    { x: 15850, width: 85, height: 16, bouncePower: -12 },
+    { x: 18600, width: 85, height: 16, bouncePower: -11 },
+    { x: 21500, width: 85, height: 16, bouncePower: -12 },
+    { x: 23800, width: 85, height: 16, bouncePower: -11 }
+];
+
+const platforms = [
+    // lots of scattered platforms now
+    { x: 2150, y: groundY - 110, width: 210, height: 20 },
+    { x: 2670, y: groundY - 65, width: 280, height: 20 },
+
+    { x: 3200, y: groundY - 140, width: 170, height: 20 },
+    { x: 3450, y: groundY - 210, width: 230, height: 20 },
+    { x: 4250, y: groundY - 110, width: 300, height: 20 },
+    { x: 5350, y: groundY - 70, width: 350, height: 20 },
+    { x: 6000, y: groundY - 130, width: 180, height: 20 },
+    { x: 6330, y: groundY - 190, width: 160, height: 20 },
+    { x: 7600, y: groundY - 100, width: 260, height: 20 },
+    { x: 7950, y: groundY - 175, width: 190, height: 20 },
+    { x: 8270, y: groundY - 125, width: 320, height: 20 },
+    { x: 10900, y: groundY - 190, width: 240, height: 20 },
+
+    { x: 11900, y: groundY - 80, width: 200, height: 20 },
+    { x: 12250, y: groundY - 155, width: 320, height: 20 },
+    { x: 12750, y: groundY - 95, width: 190, height: 20 },
+    { x: 13550, y: groundY - 130, width: 300, height: 20 },
+    { x: 13950, y: groundY - 220, width: 180, height: 20 },
+    { x: 14300, y: groundY - 150, width: 250, height: 20 },
+
+    { x: 15050, y: groundY - 80, width: 240, height: 20 },
+    { x: 17000, y: groundY - 170, width: 280, height: 20 },
+    { x: 17450, y: groundY - 100, width: 190, height: 20 },
+
+  
+    { x: 19200, y: groundY - 120, width: 220, height: 20 },
+    { x: 19550, y: groundY - 240, width: 200, height: 20 },
+    { x: 19950, y: groundY - 175, width: 350, height: 20 },
+    { x: 20400, y: groundY - 90, width: 260, height: 20 },
+    { x: 22200, y: groundY - 140, width: 300, height: 20 },
+    { x: 22650, y: groundY - 220, width: 180, height: 20 },
+    { x: 23000, y: groundY - 110, width: 350, height: 20 },
+    { x: 24250, y: groundY - 160, width: 220, height: 20 },
+    { x: 24600, y: groundY - 90, width: 280, height: 20 }
 ];
 
 function animatePlayer() {
@@ -159,43 +204,66 @@ function updatePlayer() {
 
     player.x = Math.max(0, Math.min(world_width - player.width, player.x));
 
-   
 
-    // Gravity
-    player.velocityY += player.gravity;
-    player.y += player.velocityY;
- const playerBottom = player.y + player.height;
- const playerCenter = player.x + player.width / 2;
+    // Jump
+if ((keys[" "] || keys["w"] || keys["ArrowUp"]) && player.grounded) {
+    player.velocityY = player.jumpPower;
+    player.grounded = false;
+}
 
+// Gravity
+player.velocityY += player.gravity;
+player.y += player.velocityY;
+
+const playerBottom = player.y + player.height;
+const playerCenter = player.x + player.width / 2;
+let landedOnPlatform = false;
+
+
+for (const platform of platforms) {
+    const touchingPlatform =
+        player.x + player.width > platform.x &&
+        player.x < platform.x + platform.width;
+
+  if(
+        touchingPlatform &&
+        oldBottom <= platform.y &&
+        playerBottom >= platform.y &&
+        player.velocityY > 0
+    ) {
+        player.y = platform.y - player.height;
+        player.velocityY = 0;
+        player.grounded = true;
+        landedOnPlatform = true;
+        break;
+    }
+}
     const overHole = hole.some (h => playerCenter > h.start && playerCenter < h.end);
+   
+   
+    // platform
+if (!landedOnPlatform && !overHole && playerBottom >= groundY && player.velocityY >= 0) {
+    player.y = groundY - player.height;
+    player.velocityY = 0;
+    player.grounded = true;
+}
 
-    let bounced = false;
 
-    for (const spring of springboard) {
-        const springTop = groundY - spring.height;
-    
+for (const spring of springboard) {
+    const springTop = groundY - spring.height;
+
     const touchingSpring =
-        player.x + player.width > spring.x &&
+    player.x + player.width > spring.x &&
         player.x < spring.x + spring.width;
-
-
-    //bounce
-    if (
-        touchingSpring &&
-       player.grounded)
-        {
+ 
+    if (touchingSpring && player.grounded && !overHole) {
         player.y = springTop - player.height;
         player.velocityY = spring.bouncePower;
         player.grounded = false;
-        bounced = true; 
+        
         break;
-        }
     }
-    // platform
-   if (!bounced && !overHole && playerBottom >= groundY && player.velocityY >= 0) { player.y = groundY - player.height;
-        player.velocityY = 0;
-        player.grounded = true;
-       }
+}
 
     
     if (player.y > veiw_height + 100) {
@@ -207,8 +275,10 @@ function updatePlayer() {
         player.y = groundY - player.height;
         player.velocityY = 0;
         player.grounded = true;
+        
         cameraX = player.x - veiw_width / 2;
-     }
+     } 
+
     }
 
 //keeeeeyss
@@ -305,20 +375,43 @@ ctx.fillRect(
 
 ctx.fillStyle = "#13110f";
 ctx.fillRect(groundStart, groundY, world_width - groundStart, 5);
-
+// Springboards
 for (const spring of springboard) {
     ctx.fillStyle = "#35281a";
-    ctx.fillRect(spring.x, groundY - spring.height, spring.width, spring.height);
+    ctx.fillRect(
+        spring.x,
+        groundY - spring.height,
+        spring.width,
+        spring.height
+    );
 
-
-
-
-
- 
-ctx.fillStyle= "#7e673f";
-ctx.fillRect(spring.x + 5, groundY - spring.height, spring.width - 10, 5);
+    ctx.fillStyle = "#7e673f";
+    ctx.fillRect(
+        spring.x + 5,
+        groundY - spring.height,
+        spring.width - 10,
+        5
+    );
 }
 
+// Platforms
+for (const platform of platforms) {
+    ctx.fillStyle = "#49351f";
+    ctx.fillRect(
+        platform.x,platform.y,
+        platform.width,
+        platform.height
+    );
+
+    ctx.fillStyle = "#80613a";
+    ctx.fillRect( platform.x,platform.y,platform.width,
+        5
+    );
+
+    ctx.fillStyle = "#302216";
+    ctx.fillRect(platform.x + 15, platform.y + 10, 20, 3);
+    ctx.fillRect(platform.x + platform.width - 35, platform.y + 10, 20, 3);
+}
  }
 
 
