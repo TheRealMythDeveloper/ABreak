@@ -38,15 +38,33 @@ const animationSpeed = 8;
 
 const player = {
     x: 40,
-    y: groundY - 40,
-    width: frameWidth,
-    height:frameHeight,
-    speed: 5,
+    y: groundY - (frameHeight - 50),
+    width: frameWidth - 100,
+    height:frameHeight - 50,
+    speed: 4,
     velocityY: 0,
     jumpPower: -5,
     gravity: 0.15,
 grounded:true
 };  
+
+const hole = [
+    { start: 1400, end: 1650 },
+    { start: 3800, end: 4150 },
+    { start: 6700, end: 7100 },
+    { start: 10200, end: 10600 },
+    { start: 14800, end: 15250 },
+    { start: 19500, end: 19900 }
+];
+
+const springboard = [
+    { x: 1280, width: 70, height: 16, bouncePower: -10 },
+    { x: 3650, width: 70, height: 16, bouncePower: -10 },
+    { x: 6500, width: 70, height: 16, bouncePower: -11 },
+    { x: 9900, width: 70, height: 16, bouncePower: -11 },
+    { x: 14500, width: 70, height: 16, bouncePower: -12 },
+    { x: 19200, width: 70, height: 16, bouncePower: -12 }
+];
 
 function animatePlayer() {
     if (keys["a"] || keys["d"] || keys["ArrowLeft"] || keys["ArrowRight"]){
@@ -129,33 +147,69 @@ const keys = {};
 
 function updatePlayer() {
     const oldBottom = player.y + player.height;
-    //horizontal so A D
-    if(keys["a"] || keys["ArrowLeft"]) {
+
+    // Movement
+    if (keys["a"] || keys["ArrowLeft"]) {
         player.x -= player.speed;
     }
+
     if (keys["d"] || keys["ArrowRight"]) {
         player.x += player.speed;
-    
     }
 
     player.x = Math.max(0, Math.min(world_width - player.width, player.x));
-//jumping
-    if ((keys[" "] || keys["w"] || keys["ArrowUp"]) && player.grounded) {
-        player.velocityY = player.jumpPower;
+
+   
+
+    // Gravity
+    player.velocityY += player.gravity;
+    player.y += player.velocityY;
+ const playerBottom = player.y + player.height;
+ const playerCenter = player.x + player.width / 2;
+
+    const overHole = hole.some (h => playerCenter > h.start && playerCenter < h.end);
+
+    let bounced = false;
+
+    for (const spring of springboard) {
+        const springTop = groundY - spring.height;
+    
+    const touchingSpring =
+        player.x + player.width > spring.x &&
+        player.x < spring.x + spring.width;
+
+
+    //bounce
+    if (
+        touchingSpring &&
+       player.grounded)
+        {
+        player.y = springTop - player.height;
+        player.velocityY = spring.bouncePower;
         player.grounded = false;
-
+        bounced = true; 
+        break;
+        }
     }
- //gravittty 
+    // platform
+   if (!bounced && !overHole && playerBottom >= groundY && player.velocityY >= 0) { player.y = groundY - player.height;
+        player.velocityY = 0;
+        player.grounded = true;
+       }
 
- player.velocityY += player.gravity;
- player.y += player.velocityY;
-if (player.y + player.height >= groundY) {
-    player.y = groundY - player.height;
-    player.velocityY = 0;
-    player.grounded = true;
-}
- }
+    
+    if (player.y > veiw_height + 100) {
+        const fallenInto = hole.find(h =>
+            playerCenter > h.start && playerCenter < h.end
+        );
 
+        player.x = fallenInto ? fallenInto.start - 300: 40;
+        player.y = groundY - player.height;
+        player.velocityY = 0;
+        player.grounded = true;
+        cameraX = player.x - veiw_width / 2;
+     }
+    }
 
 //keeeeeyss
 window.addEventListener("keydown", event => {
@@ -229,14 +283,41 @@ if (forest.complete && forest.naturalWidth >0) {
 }
 }
 
-
 ctx.fillStyle = "#161512";
+let groundStart = 0;
+/*ground
+*/
 
-ctx.fillRect(0, groundY, world_width, veiw_height - groundY);
+for (const h of hole) {
+    ctx.fillRect(
+        groundStart,
+        groundY, h.start - groundStart, veiw_height - groundY 
+    );
+    groundStart = h.end;
+}
 
-  ctx.fillStyle = "#26221c";
-  ctx.fillRect(0,groundY, world_width, 5);
+ctx.fillRect(
+    groundStart,
+    groundY,
+    world_width - groundStart,
+    veiw_height - groundY
+);
 
+ctx.fillStyle = "#13110f";
+ctx.fillRect(groundStart, groundY, world_width - groundStart, 5);
+
+for (const spring of springboard) {
+    ctx.fillStyle = "#35281a";
+    ctx.fillRect(spring.x, groundY - spring.height, spring.width, spring.height);
+
+
+
+
+
+ 
+ctx.fillStyle= "#7e673f";
+ctx.fillRect(spring.x + 5, groundY - spring.height, spring.width - 10, 5);
+}
 
  }
 
