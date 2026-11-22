@@ -66,7 +66,7 @@ const springboard = [
     { x: 7100, width: 85, height: 16, bouncePower: -11 },
     { x: 9600, width: 85, height: 16, bouncePower: -11 },
     { x: 13050, width: 85, height: 16, bouncePower: -10 },
-    { x: 15950, width: 85, height: 16, bouncePower: -12 },
+    { x: 15950, width: 85, height: 16, bouncePower: -14 },
     { x: 18550, width: 85, height: 16, bouncePower: -11 },
     { x: 21450, width: 85, height: 16, bouncePower: -12 },
     { x: 23750, width: 85, height: 16, bouncePower: -11 }
