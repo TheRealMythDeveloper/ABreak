@@ -54,7 +54,7 @@ const hole = [
     { start: 7200, end: 7550 },
     { start: 9700, end: 10150 },
     { start: 13200, end: 13450 },
-    { start: 16100, end: 16700 },
+    { start: 16100, end: 16680 },
     { start: 18700, end: 19050 },
     { start: 21600, end: 22000 },
     { start: 23900, end: 24150 }
@@ -66,7 +66,7 @@ const springboard = [
     { x: 7100, width: 85, height: 16, bouncePower: -11 },
     { x: 9600, width: 85, height: 16, bouncePower: -11 },
     { x: 13050, width: 85, height: 16, bouncePower: -10 },
-    { x: 15950, width: 85, height: 16, bouncePower: -14 },
+    { x: 15950, width: 85, height: 16, bouncePower: -15 },
     { x: 18550, width: 85, height: 16, bouncePower: -11 },
     { x: 21450, width: 85, height: 16, bouncePower: -12 },
     { x: 23750, width: 85, height: 16, bouncePower: -11 }
