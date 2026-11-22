@@ -4,12 +4,12 @@ const canvas = document.getElementById("treeCanvas");
 const ctx = canvas.getContext("2d");
 let veiw_height = window.innerHeight;
 let veiw_width = window.innerWidth;
-const world_width = 20000;
+const world_width = 25000;
 const world_height = 250;
 let groundY = veiw_height - 55; 
  
-  
    
+     
 function resizeGame() {
     veiw_width = window.innerWidth;
     veiw_height = window.innerHeight;
@@ -24,14 +24,22 @@ resizeGame();
 const forest = new Image();
 
 forest.src = "thehibiscuspoet-forest-saturated-export.jpg";
+const playerSprite = new Image();
+playerSprite.rc = "spritesheet.png";
+const frameWidth = 250;
+const frameHeight = 125;
+
+let animationFrame = 0;
+let animationTimer = 0;
+const animationSpeed = 0;
 
 
 
 
 const player = {
-    x: 20,
+    x: 40,
     y: groundY - 40,
-    width: 24,
+    width: 48,
     height:40,
     speed: 5,
     velocityY: 0,
@@ -40,6 +48,21 @@ const player = {
 grounded:true
 };  
 
+function animatePlayer() {
+    if (keys["a"] || keys["d"] || keys["ArrowLeft"] || keys["ArrowRight"]){
+        animationTimer++;
+        if (animationTimer >= 8) {
+            animationTimer = 0;
+            animationFrame++;
+            if (animationFrame >= 8) {
+                animationFrame = 0;
+            }
+        }
+    } else {
+        animationFrame= 0;
+        animationTimer = 0;
+    }
+}
 const dialogue = [
     "Hey..",
     "How about you take a breather?",
@@ -226,9 +249,14 @@ function drawGame() {
 
     drawWorld();
 
-    ctx.fillStyle = "#46391e";
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-
+    if (playerSprite.complete && playerSprite.naturalWidth > 0) {
+        const frameX = (animationFrame % 4) * frameWidth;
+        const frameY = Math.floor(animationFrame / 4) * frameHeight;
+        ctx.drawImage(
+playerSprite,
+frameX,frameY, frameWidth,frameHeight,player.x,player.y,player.width,player.height
+        );
+    }
     ctx.restore();
 }
 
@@ -236,7 +264,7 @@ function gameLoop() {
     updatePlayer();
     updateCameratoplayer();
     checkforscroll(); //work.. pls
-
+animatePlayer();
     drawGame();
 
     requestAnimationFrame(gameLoop);
