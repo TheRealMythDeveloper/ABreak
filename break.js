@@ -25,13 +25,13 @@ const forest = new Image();
 
 forest.src = "thehibiscuspoet-forest-saturated-export.jpg";
 const playerSprite = new Image();
-playerSprite.rc = "spritesheet.png";
+playerSprite.src = "spritesheet.png";
 const frameWidth = 250;
 const frameHeight = 125;
 
 let animationFrame = 0;
 let animationTimer = 0;
-const animationSpeed = 0;
+const animationSpeed = 8;
 
 
 
@@ -51,7 +51,7 @@ grounded:true
 function animatePlayer() {
     if (keys["a"] || keys["d"] || keys["ArrowLeft"] || keys["ArrowRight"]){
         animationTimer++;
-        if (animationTimer >= 8) {
+        if (animationTimer >= animationSpeed) {
             animationTimer = 0;
             animationFrame++;
             if (animationFrame >= 8) {
@@ -230,11 +230,11 @@ if (forest.complete && forest.naturalWidth >0) {
 }
 
 
-ctx.fillStyle = "#29251f";
+ctx.fillStyle = "#161512";
 
 ctx.fillRect(0, groundY, world_width, veiw_height - groundY);
 
-  ctx.fillStyle = "#393128";
+  ctx.fillStyle = "#26221c";
   ctx.fillRect(0,groundY, world_width, 5);
 
 
